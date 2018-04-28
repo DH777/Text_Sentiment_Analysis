@@ -24,7 +24,7 @@ public:
 
 	double calculateScore() {
 		if (count == 0) return 0;
-		return total / count;
+		return (double)total / (double)count;
 	}
 
 	string getWord() const {
@@ -33,6 +33,10 @@ public:
 
 	int getCount() const {
 		return count;
+	}
+
+	int getTotal() {
+		return total;
 	}
 };
 

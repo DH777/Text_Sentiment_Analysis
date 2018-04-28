@@ -16,11 +16,19 @@ using namespace std;
 vector<Sentence*>* readFile(char*); // Part 1
 set<Word*>* allWords(vector<Sentence*>&); // Part 2
 map<string, double>* calculateScores(set<Word*>&); // Part 3
-//double calculateSentenceScore(map<string, double>&, string); // Part 4
+double calculateSentenceScore(map<string, double>&, string); // Part 4
 
 int main(int argc, char* argv[]) {
 	vector<Sentence*>* v = readFile(argv[1]);
 	set<Word*>* set = allWords(*v);
 	map<string, double>* map = calculateScores(*set);
-	
+	// cout << map->find("happy")->second << "\n";
+	cout << "Please enter a sentence:" << "\n";
+	string input;
+	getline(cin, input);
+	while (!(input.compare("quit") == 0)) {
+		cout << calculateSentenceScore(*map, input) << "\n";
+		cout << "Please enter a sentence:" << "\n";
+		getline(cin, input);
+	}
 }

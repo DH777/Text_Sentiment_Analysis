@@ -61,18 +61,27 @@ set<Word*, wordComparator>* allWords(vector<Sentence*>& sentences) {
   	std::string text = sentences[i]->getText();
   	vector<string> ws;
   	split(ws, text, is_any_of(" "));
-  	std::string initWord = ws[0];
-  	if(initWord.length() == 0 || !isalpha(initWord.at(0))) continue;
+  	      	// if (ws.size() != 0 && ws[0].compare("Provides") == 0) cout << text << "\n";
+  	// std::string initWord = ws[0];
+  	// if(initWord.length() == 0 || !isalpha(initWord.at(0))) continue;
   	for (int j = 0; j < ws.size(); j++) {
   		if (ws[j].length() == 0 || !isalpha(ws[j].at(0))) continue;
   		to_lower(ws[j]);
   		Word* newWord = new Word(ws[j]);
   		// cout << ws[j] << "\n";
   		if (words->find(newWord) == words->end()) {
+  			newWord->increaseTotal(sentences[i]->getScore());
   			words->insert(newWord);
   		}else {
   			Word* cur = *(words->find(newWord));
   			cur->increaseTotal(sentences[i]->getScore());
+  			// if (ws[j].compare("happy") == 0) {
+  			// 	cout << cur->getCount() << "\n";
+  			// 	cout << cur->getTotal() << "\n";
+  			// 	cout << sentences[i]->getScore() << "\n";
+  			// 	cout << sentences[i]->getText() << "\n";
+  			// 	cout << "\n";
+  			// }
   		}
   	}
   }
@@ -97,7 +106,18 @@ map<string, double>* calculateScores(set<Word*>& words) {
 
 double calculateSentenceScore(map<string, double>& scores, string sentence) {
 
-	
-
+	vector<string> words;
+	split(words, sentence, is_any_of(" "));
+	double total = 0;
+	for (int i = 0; i < words.size(); i++) {
+		map<string,double>::iterator it;
+		it = scores.find(words[i]);
+		if (it != scores.end()) {
+			total = total + it->second; 
+		}
+	}
+	// cout << "total is" << total << "\n";
+	// cout << "size is" << words.size() << "\n";
+	return total / words.size();
 }
 
