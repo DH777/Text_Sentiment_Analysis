@@ -94,10 +94,10 @@ map<string, double>* calculateScores(set<Word*>& words) {
 
 
 
-/*
+
 double calculateSentenceScore(map<string, double>& scores, string sentence) {
 
-  // UNCOMMENT AND IMPLEMENT THIS FOR PART 4
+	
 
 }
-*/
+

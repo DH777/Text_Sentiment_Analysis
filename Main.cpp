@@ -20,9 +20,7 @@ map<string, double>* calculateScores(set<Word*>&); // Part 3
 
 int main(int argc, char* argv[]) {
 	vector<Sentence*>* v = readFile(argv[1]);
-	cout << v->size();
 	set<Word*>* set = allWords(*v);
-	cout << set->size();
 	map<string, double>* map = calculateScores(*set);
-	cout << map->size();
+	
 }
