@@ -22,7 +22,7 @@ int main(int argc, char* argv[]) {
 	vector<Sentence*>* v = readFile(argv[1]);
 	set<Word*>* set = allWords(*v);
 	map<string, double>* map = calculateScores(*set);
-	// cout << map->find("happy")->second << "\n";
+	cout << map->find("happy")->second << "\n";
 	cout << "Please enter a sentence:" << "\n";
 	string input;
 	getline(cin, input);
@@ -31,4 +31,15 @@ int main(int argc, char* argv[]) {
 		cout << "Please enter a sentence:" << "\n";
 		getline(cin, input);
 	}
+
+	//clean mem
+	vector<Sentence*> sentences = *v;
+	for (int i = 0; i < sentences.size(); i++) {
+		delete(sentences[i]);
+	}
+	delete(v);
+  	set->clear();
+	delete(set);
+	map->clear();
+	delete(map);
 }

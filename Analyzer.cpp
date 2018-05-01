@@ -75,13 +75,7 @@ set<Word*, wordComparator>* allWords(vector<Sentence*>& sentences) {
   		}else {
   			Word* cur = *(words->find(newWord));
   			cur->increaseTotal(sentences[i]->getScore());
-  			// if (ws[j].compare("happy") == 0) {
-  			// 	cout << cur->getCount() << "\n";
-  			// 	cout << cur->getTotal() << "\n";
-  			// 	cout << sentences[i]->getScore() << "\n";
-  			// 	cout << sentences[i]->getText() << "\n";
-  			// 	cout << "\n";
-  			// }
+  			delete(newWord);
   		}
   	}
   }
@@ -97,6 +91,7 @@ map<string, double>* calculateScores(set<Word*>& words) {
   	double score = (*it)->calculateScore();
   	string word = (*it)->getWord();
   	mymap->insert (std::pair<string,double>(word,score)); 
+  	delete(*it);
   }
   return mymap;
 }
